@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: fluentd-logging
+      version: v1S   # Changed 'v1' to 'v1S'
+  template:
+    metadata:
+      labels:
+        k8s-app: fluentd-logging
+        version: v1S   # Changed 'v1' to 'v1S'
+    spec:
+      containers:
+      - name: node
+        image: chentex/random-logger:latest
+        imagePullPolicy: Always
+      restartPolicy: Always
